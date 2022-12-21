@@ -12,7 +12,11 @@ contract MockAggregator {
         s_answer = answer;
     }
 
-    function latestAnswer() public view returns (int256) {
-        return s_answer;
+    function latestRoundData()
+        external
+        view
+        returns (uint80, int256, uint256, uint256, uint80)
+    {
+        return (0, s_answer, 0, 0, 0);
     }
 }
