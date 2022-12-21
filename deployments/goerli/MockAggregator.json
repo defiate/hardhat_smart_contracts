@@ -1,0 +1,120 @@
+{
+  "address": "0x6E56343E45190D2C467f7e828dbDA472D431a199",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "latestRoundData",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_answer",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "answer",
+          "type": "int256"
+        }
+      ],
+      "name": "setLatestAnswer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x15a51710f2f9ed4f0259dd2c0d828251e5ab99fdba90f92b7339db30a1626b83",
+  "receipt": {
+    "to": null,
+    "from": "0x066e7a421Fdd36f2263938aB328D8b2F09d9fCE0",
+    "contractAddress": "0x6E56343E45190D2C467f7e828dbDA472D431a199",
+    "transactionIndex": 89,
+    "gasUsed": "126233",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x56395d721db5126a97e2d3eec0f35652780338564fdfdf82f3ebceb97442c916",
+    "transactionHash": "0x15a51710f2f9ed4f0259dd2c0d828251e5ab99fdba90f92b7339db30a1626b83",
+    "logs": [],
+    "blockNumber": 8175406,
+    "cumulativeGasUsed": "13983078",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "23efcfb3ff37672af8fa7dd4ae15c129",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"latestRoundData\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"\",\"type\":\"uint80\"},{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint80\",\"name\":\"\",\"type\":\"uint80\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_answer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"answer\",\"type\":\"int256\"}],\"name\":\"setLatestAnswer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/test/MockAggregator.sol\":\"MockAggregator\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1000000},\"remappings\":[]},\"sources\":{\"contracts/test/MockAggregator.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract MockAggregator {\\n    int256 public s_answer;\\n\\n    constructor() {\\n        setLatestAnswer(5360444);\\n    }\\n\\n    function setLatestAnswer(int256 answer) public {\\n        s_answer = answer;\\n    }\\n\\n    function latestRoundData()\\n        external\\n        view\\n        returns (uint80, int256, uint256, uint256, uint80)\\n    {\\n        return (0, s_answer, 0, 0, 0);\\n    }\\n}\\n\",\"keccak256\":\"0xdc230c06bbfc2efa3f67a46169746f876fc2deab9d77409fdf11d2635456481e\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061001d6251cb3c600055565b60ea8061002b6000396000f3fe6080604052348015600f57600080fd5b5060043610603c5760003560e01c806304ea97b0146041578063305da2db146053578063feaf968c14606e575b600080fd5b6051604c366004609c565b600055565b005b605b60005481565b6040519081526020015b60405180910390f35b60008054604080518381526020810192909252810182905260608101829052608081019190915260a0016065565b60006020828403121560ad57600080fd5b503591905056fea2646970667358221220ee31c150ddbba5da15f143d3528a5d5f053ec343d7b2750272c0290b2585eaa064736f6c634300080a0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610603c5760003560e01c806304ea97b0146041578063305da2db146053578063feaf968c14606e575b600080fd5b6051604c366004609c565b600055565b005b605b60005481565b6040519081526020015b60405180910390f35b60008054604080518381526020810192909252810182905260608101829052608081019190915260a0016065565b60006020828403121560ad57600080fd5b503591905056fea2646970667358221220ee31c150ddbba5da15f143d3528a5d5f053ec343d7b2750272c0290b2585eaa064736f6c634300080a0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3,
+        "contract": "contracts/test/MockAggregator.sol:MockAggregator",
+        "label": "s_answer",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_int256"
+      }
+    ],
+    "types": {
+      "t_int256": {
+        "encoding": "inplace",
+        "label": "int256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

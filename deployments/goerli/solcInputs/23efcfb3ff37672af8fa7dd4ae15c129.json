@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/test/MockAggregator.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract MockAggregator {\n    int256 public s_answer;\n\n    constructor() {\n        setLatestAnswer(5360444);\n    }\n\n    function setLatestAnswer(int256 answer) public {\n        s_answer = answer;\n    }\n\n    function latestRoundData()\n        external\n        view\n        returns (uint80, int256, uint256, uint256, uint80)\n    {\n        return (0, s_answer, 0, 0, 0);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 1000000
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

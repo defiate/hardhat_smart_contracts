@@ -22,7 +22,7 @@ const deployLendingPool: DeployFunction = async function (
         from: deployer.address,
         log: true,
         args: args,
-        waitConfirmations: 1,
+        waitConfirmations: 5,
     })
     LendingPoolAddress = LendingPool.address
     log(`myERC20Votes deployed at ${LendingPool.address}`)

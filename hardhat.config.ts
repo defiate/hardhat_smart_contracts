@@ -9,6 +9,7 @@ import fs from "fs-extra"
 
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
 const ETHEREUM_ALCHEMY = process.env.ETHEREUM_ALCHEMY || "key"
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "key"
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key"
 
 export let PRIVATE_KEY: string
@@ -49,6 +50,11 @@ const config: HardhatUserConfig = {
                 url: ETHEREUM_ALCHEMY,
                 // blockNumber: 3627190,
             },
+        },
+        goerli: {
+            url: GOERLI_RPC_URL,
+            accounts: [PRIVATE_KEY],
+            chainId: 5,
         },
     },
     gasReporter: {

@@ -20,7 +20,7 @@ const deployPTRYToken: DeployFunction = async function (
         from: deployer.address,
         log: true,
         args: args,
-        waitConfirmations: 1,
+        waitConfirmations: 5,
     })
     pTRYTokenAddress = pTRYToken.address
     log(`myERC20Votes deployed at ${pTRYToken.address}`)
