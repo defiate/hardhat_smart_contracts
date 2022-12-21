@@ -36,6 +36,7 @@ interface IERC20 {
 }
 
 error NotEnoughApproval();
+error NotUnderCollateralize();
 
 contract lendingPool is AccessControl {
     /* Variables */
@@ -51,15 +52,15 @@ contract lendingPool is AccessControl {
         uint256 dept;
     }
 
-    Vault[] public vault;
-    uint8 private s_collateralRatio;
+    Vault public vault;
+    uint8 private s_minCollateralRatio;
 
     constructor(pTRYTokenInterface _pTRYToken, address _oracle) {
         i_CollateralToken = IERC20(0xDF1742fE5b0bFc12331D8EAec6b478DfDbD31464); // DAI on goerli testnet
         i_pTRYToken = pTRYTokenInterface(_pTRYToken);
         i_oracle = AggregatorV3Interface(_oracle);
         _grantRole(COLLATERAL_ADMIN_ROLE, msg.sender);
-        s_collateralRatio = 90;
+        s_minCollateralRatio = 10;
     }
 
     /**@dev Mint pTRY token
@@ -72,7 +73,8 @@ contract lendingPool is AccessControl {
             i_CollateralToken.allowance(msg.sender, address(this)) <
             reqCollateral
         ) revert NotEnoughApproval();
-        vault.push(Vault(reqCollateral, amount));
+        vault.dept += amount;
+        vault.margin += reqCollateral;
         i_CollateralToken.transferFrom(
             msg.sender,
             address(this),
@@ -84,12 +86,52 @@ contract lendingPool is AccessControl {
     function burnPTRY(uint256 amount) external {
         if (i_pTRYToken.allowance(msg.sender, address(this)) < amount)
             revert NotEnoughApproval();
+
+        uint256 reqCollateral = getRequiredCollateral(amount);
+        i_pTRYToken.burnFrom(msg.sender, amount);
+        i_CollateralToken.transfer(msg.sender, reqCollateral);
+        vault.dept -= amount;
+        vault.margin -= reqCollateral;
     }
 
     function setCollateralRatio(
         uint8 _ratio
     ) external onlyRole(COLLATERAL_ADMIN_ROLE) {
-        s_collateralRatio = _ratio;
+        s_minCollateralRatio = _ratio;
+    }
+
+    function liquidate() public {
+        if (!checkLiquidation()) revert NotUnderCollateralize();
+
+        uint256 _debt = vault.dept;
+        uint256 _margin = vault.margin;
+        if (i_pTRYToken.allowance(msg.sender, address(this)) < _debt)
+            revert NotEnoughApproval();
+
+        i_pTRYToken.burnFrom(msg.sender, _debt);
+        i_CollateralToken.transfer(msg.sender, _margin);
+        vault.dept -= _debt;
+        vault.margin -= _margin;
+    }
+
+    function checkLiquidation() public view returns (bool) {
+        uint256 collateralRatio = checkCollateralRatio();
+        if (collateralRatio < s_minCollateralRatio) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkCollateralRatio()
+        public
+        view
+        returns (uint256 collateralRatio_)
+    {
+        collateralRatio_ = uint256(
+            ((vault.margin - getRequiredCollateral(vault.dept)) /
+                vault.margin) * 100
+        );
     }
 
     function getRate() public view returns (int256 answer_) {
