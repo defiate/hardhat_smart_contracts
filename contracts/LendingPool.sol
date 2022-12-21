@@ -38,7 +38,7 @@ interface IERC20 {
 error NotEnoughApproval();
 error NotUnderCollateralize();
 
-contract lendingPool is AccessControl {
+contract LendingPool is AccessControl {
     /* Variables */
     bytes32 public constant COLLATERAL_ADMIN_ROLE =
         keccak256("COLLATERAL_ADMIN_ROLE");
