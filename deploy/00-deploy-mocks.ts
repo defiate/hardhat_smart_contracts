@@ -20,7 +20,7 @@ const deployMockAggregator: DeployFunction = async function (
         from: deployer.address,
         log: true,
         args: args,
-        waitConfirmations: 5,
+        waitConfirmations: 1,
     })
     mockAggregatorAddress = mockAggregator.address
     log(`MockAggregator deployed at ${mockAggregator.address}`)

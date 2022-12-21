@@ -116,6 +116,7 @@ contract LendingPool is AccessControl {
 
     function checkLiquidation() public view returns (bool) {
         uint256 collateralRatio = checkCollateralRatio();
+
         if (collateralRatio < s_minCollateralRatio) {
             return true;
         } else {
@@ -129,8 +130,8 @@ contract LendingPool is AccessControl {
         returns (uint256 collateralRatio_)
     {
         collateralRatio_ = uint256(
-            ((vault.margin - getRequiredCollateral(vault.dept)) /
-                vault.margin) * 100
+            (((vault.margin - getRequiredCollateral(vault.dept)) * 100) /
+                vault.margin)
         );
     }
 
@@ -148,7 +149,7 @@ contract LendingPool is AccessControl {
 
     function getRequiredCollateral(
         uint256 amount
-    ) private view returns (uint256 reqCollateral_) {
+    ) public view returns (uint256 reqCollateral_) {
         uint256 _rate = uint256(getRate());
         reqCollateral_ = (amount * _rate) / 100000000;
     }

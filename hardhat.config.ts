@@ -47,7 +47,8 @@ const config: HardhatUserConfig = {
     networks: {
         hardhat: {
             forking: {
-                url: ETHEREUM_ALCHEMY,
+                url: GOERLI_RPC_URL,
+                // url: ETHEREUM_ALCHEMY,
                 // blockNumber: 3627190,
             },
         },
